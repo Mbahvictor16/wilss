@@ -9,7 +9,7 @@ export const HomeLoader = async (): Promise<Sources> => {
   const today = new Date(Date.now());
   try {
     const response = await axios.get<Sources>(
-      `https://newsapi.org/v2/top-headlines/sources?language=en&apiKey=${apikey}`
+      `https://newsapi.org/v2/top-headlines/sources?language=en&apiKey=4ad228ae757c43c5a16ef130fdb88368`
     );
 
     return response.data
