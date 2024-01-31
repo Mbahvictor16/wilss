@@ -5,10 +5,11 @@ import { ResponseProps } from "../types";
 import Category from "../components/Category/Category";
 import Reload from "../helpers/Reload";
 import Footer from "../components/Footer/Footer";
+import axios from "axios";
 
 const CategoryPage: React.FC = () => {
   const {category} = useParams<Readonly<Params<string>>>();
-  const [article, setArticle] = useState<ResponseProps>();
+  const [data, setArticle] = useState<ResponseProps>();
   const [error, setError]= useState<Error>();
   const location = useLocation()
   const apikey = (import.meta as ImportMeta).env.VITE_APIKEY
@@ -16,22 +17,31 @@ const CategoryPage: React.FC = () => {
   useLayoutEffect(() => {
     async function getCategory() {
       try {
-        const response = await fetch(`https://newsapi.org/v2/top-headlines?language=en&category=${category}&apiKey=${apikey}`);
+        const options = {
+          method: 'GET',
+          url: `https://google-news13.p.rapidapi.com/${category}`,
+          params: {lr: 'en-US'},
+          headers: {
+            'X-RapidAPI-Key': 'c32ea2f91fmsh42fd0cd17896b23p16be03jsn3b57178ffd83',
+            'X-RapidAPI-Host': 'google-news13.p.rapidapi.com'
+          }
+        };
+    
+        const response = await axios.request(options);
 
-        if(response.ok) {
-          const data = await response.json();
-          setArticle(data);
+        if (response.status === 200) {
+          setArticle(response.data)
+          console.log(category, response.data.data);
+          
         }
-      } catch (error: any) {
-        setError(error)
+        
+      } catch (error) {
+        throw error
       }
     }
     
     getCategory();
   }, [category]);
-  
-
-
 
 
   return (
@@ -47,17 +57,17 @@ const CategoryPage: React.FC = () => {
               </Link>
             </div>
           </div> : 
-          !article ? <Loading /> : 
-          article ?
+          !data ? <Loading /> : 
+          data ?
           (
             
-            <Category articles={article.articles}/>
+            <Category items={data.items} />
             
           ) : <div>No article was found.</div>
         }
 
     </main>
-    {article && <Footer />}
+    {data && <Footer />}
     </>
   );
 };

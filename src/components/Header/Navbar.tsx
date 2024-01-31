@@ -14,22 +14,22 @@ const Navbar: React.FC = () => {
         <ul className='flex lg:ml-6 ml-1 md:justify-center'>
             <li className='mx-6'>
               <NavLink to="/" className="hover:text-red-500" 
-              style={({isActive}) => isActive ? styles : undefined}>Sources</NavLink>
+              style={({isActive}) => isActive ? styles : undefined}>World</NavLink>
             </li>
             <li className='mx-6'>
-              <NavLink to="/category/general" className="hover:text-red-500" 
-              style={({isActive}) => isActive ? styles : undefined}>General</NavLink>
+              <NavLink to="/category/health" className="hover:text-red-500" 
+              style={({isActive}) => isActive ? styles : undefined}>Health</NavLink>
             </li>
             <li className='mx-6'>
-              <NavLink to="/category/politics" className="hover:text-red-500" 
-              style={({isActive}) => isActive ? styles : undefined}>Politics</NavLink>
+              <NavLink to="/category/business" className="hover:text-red-500" 
+              style={({isActive}) => isActive ? styles : undefined}>Business</NavLink>
             </li>
             <li className='mx-6'>
               <NavLink to="/category/sport" className="hover:text-red-500" 
               style={({isActive}) => isActive ? styles : undefined}>Sport</NavLink>
             </li>
             <li className='mx-6'>
-              <NavLink to="/category/technology" className="hover:text-red-500" 
+              <NavLink to="/category/technology" className="hover:text-red-400" 
               style={({isActive}) => isActive ? styles : undefined}>Technology</NavLink>
             </li>
             <li className='mx-6 pr-4'>

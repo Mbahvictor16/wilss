@@ -1,21 +1,28 @@
 interface Article {
-  source?: {
-    id: string;
-    name: string;
+  title: string
+  snippet?: string | null;
+  timestamp?: string;
+  publisher?: string;
+  newsUrl: string;
+  images: {
+    thumbnail: string
   };
-  author?: string | null;
-  title: string;
-  description?: string;
-  url: string;
-  urlToImage?: string | null;
-  publishedAt?: Date;
-  content?: string;
+  hasSubnews?: boolean;
+  subnews?: {
+    title: string
+    snippet?: string | null;
+    timestamp?: string;
+    publisher?: string;
+    newsUrl: string;
+    images: {
+      thumbnail: string
+    };
+  }
 }
 
 interface ResponseProps {
   status?: string;
-  totalResults?: number;
-  articles: Article[];
+  items: Article[];
 }
 
 interface Sources {
@@ -35,5 +42,7 @@ interface Error {
   message: string;
   status: number;
 }
+
+
 
 export { Article, ResponseProps, Error, Sources };
